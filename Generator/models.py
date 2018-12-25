@@ -39,8 +39,14 @@ class Deck(models.Model):
 	def __str__(self):
 		return f'{self.name}'
 
+	def get_absolute_url(self):
+		return reverse('generator:deck-detail', kwargs={'pk': self.id})
+
 	def card_query(self):
 		return Card.objects.filter(decks__name__contains=self.name)
+
+	def game_query(self):
+		return Game.objects.filter(card__decks__name__contains=self.name)
 
 
 class Card(models.Model):
@@ -50,3 +56,6 @@ class Card(models.Model):
 
 	def __str__(self):
 		return f'{self.word}'
+
+	def get_absolute_url(self):
+		return reverse('generator:card-detail', kwargs={'pk': self.id})

@@ -41,3 +41,69 @@ class GameDelete(mixins.GroupRequiredMixin, generic.DeleteView):
 
 	model = models.Game
 	success_url = reverse_lazy('generator:game-list')
+
+
+class DeckCreate(mixins.GroupRequiredMixin, generic.CreateView):
+	group_required = ['Moderators']
+
+	model = models.Deck
+	fields = '__all__'
+
+
+class DeckList(mixins.GroupRequiredMixin, generic.ListView):
+	group_required = ['Moderators']
+
+	model = models.Deck
+
+
+class DeckDetail(mixins.GroupRequiredMixin, generic.DetailView):
+	group_required = ['Moderators']
+
+	model = models.Deck
+
+
+class DeckUpdate(mixins.GroupRequiredMixin, generic.UpdateView):
+	groups_required = ['Moderators']
+
+	model = models.Deck
+	fields = '__all__'
+
+
+class DeckDelete(mixins.GroupRequiredMixin, generic.DeleteView):
+	group_required = ['Moderators']
+
+	model = models.Deck
+	success_url = reverse_lazy('generator:deck-list')
+
+
+class CardCreate(mixins.GroupRequiredMixin, generic.CreateView):
+	group_required = ['Moderators']
+
+	model = models.Card
+	fields = '__all__'
+
+
+class CardList(mixins.GroupRequiredMixin, generic.ListView):
+	group_required = ['Moderators']
+
+	model = models.Card
+
+
+class CardDetail(mixins.GroupRequiredMixin, generic.DetailView):
+	group_required = ['Moderators']
+
+	model = models.Card
+
+
+class CardUpdate(mixins.GroupRequiredMixin, generic.UpdateView):
+	groups_required = ['Moderators']
+
+	model = models.Card
+	fields = '__all__'
+
+
+class CardDelete(mixins.GroupRequiredMixin, generic.DeleteView):
+	group_required = ['Moderators']
+
+	model = models.Card
+	success_url = reverse_lazy('generator:card-list')
