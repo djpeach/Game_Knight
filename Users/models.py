@@ -1,32 +1,22 @@
 from django.db import models
+from django.contrib.auth.models import User
+from PIL import Image
 
 
-class Game(models.Model):
-	name = models.CharField(max_length=100)
-
-	DIFFICULTIES = (
-		('easy', 'Easy'),
-		('medium', 'Medium'),
-		('hard', 'Hard'),
-	)
-
-	difficulty = models.CharField(max_length=10, choices=DIFFICULTIES)
+class Profile(models.Model):
+	user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+	image = models.ImageField(default='default_profile.png', upload_to='profile_pics')
 
 	def __str__(self):
-		return f'{self.name} - {self.difficulty}'
+		return f'{self.user.username}\'s Profile'
 
+	def save(self, *args, **kwargs):
+		super().save(*args, **kwargs)
 
-class Deck(models.Model):
-	name = models.CharField(max_length=100)
+		img = Image.open(self.image.path)
 
-	def __str__(self):
-		return f'{self.name} Deck'
+		if img.height > 300 or img.width > 300:
+			output_size = (300, 300)
+			img.thumbnail(output_size)
+			img.save(self.image.path)
 
-
-class Card(models.Model):
-	word = models.CharField(max_length=30)
-	decks = models.ManyToManyField(Deck)
-	games = models.ManyToManyField(Game)
-
-	def __str__(self):
-		return f'{self.word}'
