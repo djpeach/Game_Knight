@@ -6,4 +6,5 @@ urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('', views.index, name='index'),
 	path('users/', include('Users.urls')),
+	path('generator/', include('Generator.urls')),
 ]

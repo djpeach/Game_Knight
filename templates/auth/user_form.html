@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col col-sm-10 col-md-8 col-lg-6 mt-3">
+            <div class="col col-sm-10 col-md-8 col-lg-6 my-3">
                 <form method="POST">
                   {% csrf_token %}
                   <fieldset class="form-group">
@@ -14,6 +14,7 @@
                     <button class="btn btn-outline-info" type="submit">Sign Up</button>
                   </div>
                 </form>
+                <small class="text-muted">Already have an account? <a href="{% url 'users:login' %}">Login</a> instead.</small>
             </div>
         </div>
     </div>

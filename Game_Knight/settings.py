@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 	'Generator.apps.GeneratorConfig',
 	'Player.apps.PlayerConfig',
 	'Users.apps.UsersConfig',
+	'TagsAndFilters.apps.TagsandfiltersConfig',
 
 	# 3rd Party Apps
 	'crispy_forms',

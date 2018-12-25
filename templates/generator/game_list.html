@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        {% if game_list %}
+            {% for game in game_list %}
+                <div class="row justify-content-center">
+                    <div class="col col-sm-10 col-md-8 col-lg-6 my-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title m-0">
+                                    {{ game }}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="font-weight-bolder m-0 d-flex justify-content-around">
+                                    <span><span class="text-info">Decks:</span> {{ game.deck_query.count }}</span>
+                                    <span><span class="text-info">Cards:</span> {{ game.card_set.count }}</span>
+                                    <a href="{{ game.get_absolute_url }}" class="btn btn-info btn-sm">View Game</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
