@@ -11,7 +11,7 @@
 					{% if user.is_authenticated %}
 						<p>Get started with a new game now, or check out your profile to see past games and more.</p>
 						<a class="btn btn-success btn-lg ml-3 my-3" href="#" role="button">New Game</a>
-						<a class="btn btn-info btn-lg ml-3 my-3" href="#" role="button">Profile</a>
+						<a class="btn btn-info btn-lg ml-3 my-3" href="{% url 'users:profile' %}" role="button">Profile</a>
 					{% else %}
 						<p>Sign in, or get yourself a FREE account to start playing Pictionary, Charades, Catch Phrase, and more!</p>
 						<a class="btn btn-success btn-lg ml-3 my-3" href="{% url 'users:registration' %}" role="button">Sign Up</a>

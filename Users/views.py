@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import decorators as auth_decorators
 from . import forms
+from . import decorators
 
 
 def user_registration(req):
@@ -16,3 +19,8 @@ def user_registration(req):
 		form = forms.UserRegistrationForm()
 
 	return render(req, 'auth/user_form.html', {'form': form})
+
+
+@decorators.user_in_group(groups=['Moderators'])
+def user_profile(req):
+	return HttpResponse('hey')
