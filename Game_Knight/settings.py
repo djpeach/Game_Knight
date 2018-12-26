@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 	'Generator.apps.GeneratorConfig',
 	'Player.apps.PlayerConfig',
 	'Users.apps.UsersConfig',
+	'TagsAndFilters.apps.TagsandfiltersConfig',
 
 	# 3rd Party Apps
 	'crispy_forms',
@@ -128,6 +129,10 @@ Custom Additional Settings
 """
 
 LOGIN_REDIRECT_URL = 'index'
+
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, "static"),
+]
 
 
 """
