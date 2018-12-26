@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.views import generic
+from django.urls import reverse, reverse_lazy
+from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth import decorators as auth_decorators
 from . import forms
+from . import decorators
 
 
 def user_registration(req):
@@ -15,4 +17,9 @@ def user_registration(req):
 	else:
 		form = forms.UserRegistrationForm()
 
-	return render(req, 'auth/user_form.html', {'form': form})
+	return render(req, 'users/user_form.html', {'form': form})
+
+
+@auth_decorators.login_required(login_url=reverse_lazy('users:login'))
+def user_profile(req):
+	return render(req, 'users/profile.html')

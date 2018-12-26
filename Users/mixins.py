@@ -1,7 +1,6 @@
-from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.contrib.auth import models as auth_models
 from django.urls import reverse_lazy
+
 
 class GroupRequiredMixin(UserPassesTestMixin):
 
