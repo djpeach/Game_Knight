@@ -1,4 +1,5 @@
 {% load auth_filters %}
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,6 +10,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="{% static 'styles/css/style.min.css' %}">
 
     <title>{% block title %}Game Knight{% endblock title %}</title>
 </head>
@@ -56,8 +59,8 @@
                         Cards
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="cardsModDropdown">
-                        <a class="dropdown-item" href="{% url 'generator:card-create' %}">+ New Card</a>
-                        <a class="dropdown-item" href="{% url 'generator:card-list' %}">View All</a>
+                        <a class="dropdown-item" href="{% url 'generator:mod-card-create' %}">+ New Card</a>
+                        <a class="dropdown-item" href="{% url 'generator:mod-card-list' %}">View All</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -66,8 +69,8 @@
                         Decks
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="decksModDropdown">
-                        <a class="dropdown-item" href="{% url 'generator:deck-create' %}">+ New Deck</a>
-                        <a class="dropdown-item" href="{% url 'generator:deck-list' %}">View All</a>
+                        <a class="dropdown-item" href="{% url 'generator:mod-deck-create' %}">+ New Deck</a>
+                        <a class="dropdown-item" href="{% url 'generator:mod-deck-list' %}">View All</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -76,8 +79,8 @@
                         Games
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gamesModDropdown">
-                        <a class="dropdown-item" href="{% url 'generator:game-create' %}">+ New Game</a>
-                        <a class="dropdown-item" href="{% url 'generator:game-list' %}">View All</a>
+                        <a class="dropdown-item" href="{% url 'generator:mod-game-create' %}">+ New Game</a>
+                        <a class="dropdown-item" href="{% url 'generator:mod-game-list' %}">View All</a>
                     </div>
                 </li>
             </ul>

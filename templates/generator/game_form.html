@@ -7,10 +7,19 @@
                 <form method="POST">
                   {% csrf_token %}
                   <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">New Game</legend>
+                    <legend class="border-bottom mb-4">
+											{% if game %}
+												Update Game
+											{% else %}
+												New Game
+											{% endif %}
+										</legend>
                     {{ form|crispy }}
                   </fieldset>
                   <div class="form-group">
+										{% if game %}
+                    	<a href="{% url 'generator:mod-game-detail' game.id %}" class="btn btn-outline-secondary">Cancel</a>
+										{% endif %}
                     <button class="btn btn-outline-info" type="submit">Save Game</button>
                   </div>
                 </form>

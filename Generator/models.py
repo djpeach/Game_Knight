@@ -24,13 +24,20 @@ class Game(models.Model):
 		return f'{self.get_name_display()} - {self.get_difficulty_display()}'
 
 	def get_absolute_url(self):
-		return reverse('generator:game-detail', kwargs={'pk': self.id})
+		return reverse('generator:mod-game-detail', kwargs={'pk': self.id})
 
 	def deck_query(self):
 		return Deck.objects.filter(card__games__name__contains=self.name, card__games__difficulty=self.difficulty).distinct()
 
 	def card_query(self):
 		return Card.objects.filter(games__name__contains=self.name, games__difficulty__contains=self.difficulty)
+
+	def cards_per_deck_query(self):
+		decks = Deck.objects.filter(card__games__name__contains=self.name, card__games__difficulty=self.difficulty).distinct()
+		cards = []
+		for deck in decks:
+			cards.append((deck, Card.objects.filter(games__name__contains=self.name, games__difficulty__contains=self.difficulty, decks__name__contains=deck.name)))
+		return cards
 
 
 class Deck(models.Model):
@@ -40,17 +47,17 @@ class Deck(models.Model):
 		return f'{self.name}'
 
 	def get_absolute_url(self):
-		return reverse('generator:deck-detail', kwargs={'pk': self.id})
+		return reverse('generator:mod-deck-detail', kwargs={'pk': self.id})
 
 	def card_query(self):
 		return Card.objects.filter(decks__name__contains=self.name)
 
 	def game_query(self):
-		return Game.objects.filter(card__decks__name__contains=self.name)
+		return Game.objects.filter(card__decks__name__contains=self.name).distinct()
 
 
 class Card(models.Model):
-	word = models.CharField(max_length=30)
+	word = models.CharField(max_length=30, unique=True)
 	decks = models.ManyToManyField(Deck)
 	games = models.ManyToManyField(Game)
 
@@ -58,4 +65,4 @@ class Card(models.Model):
 		return f'{self.word}'
 
 	def get_absolute_url(self):
-		return reverse('generator:card-detail', kwargs={'pk': self.id})
+		return reverse('generator:mod-card-detail', kwargs={'pk': self.id})

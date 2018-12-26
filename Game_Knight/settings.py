@@ -130,6 +130,10 @@ Custom Additional Settings
 
 LOGIN_REDIRECT_URL = 'index'
 
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, "static"),
+]
+
 
 """
 3rd Party Settings
