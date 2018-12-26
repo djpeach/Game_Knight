@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load custom_filters %}
+{% block content %}
+	<div class="container-fluid" style="max-width: 1500px; margin: 0 auto;">
+		<div class="row">
+			{% if deck %}
+				<div class="col-12 mt-3">
+					<h2>Deck: {{ deck }}
+						<a href="{% url 'generator:mod-deck-delete' deck.id %}" class="btn btn-outline-danger btn-sm ml-5">Delete Deck</a>
+						<a href="{% url 'generator:mod-deck-update' deck.id %}" class="btn btn-outline-info btn-sm ml-2">Edit Deck</a>
+					</h2>
+					<hr>
+				</div>
+				<div class="col-12 mt-3">
+					<h5>Cards in this deck:</h5>
+					<div class="row">
+						{% for card in deck.card_query %}
+							<div class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3">
+								<a href="{{ card.get_absolute_url }}" class="btn btn-outline-info w-100">
+									<div class="card-body text-center font-weight-bold">
+										{{ card }}
+									</div>
+								</a>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-12 mt-3">
+					<h5>Games using this deck:</h5>
+					<div class="row">
+						{% for game in deck.game_query %}
+							<div class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3">
+								<a href="{{ game.get_absolute_url }}" class="btn btn-outline-info w-100 h-100">
+									<div class="card-body text-center font-weight-bold align-middle">
+										{{ game }}
+									</div>
+								</a>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

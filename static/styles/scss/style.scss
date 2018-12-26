@@ -1,0 +1,17 @@
+%multi-select {
+  width: 45%;
+  display: inline-block;
+
+  select {
+    min-height: 400px;
+  }
+}
+
+#div_id_decks {
+  @extend %multi-select;
+}
+
+#div_id_games {
+  @extend %multi-select;
+  margin-left: 9%;
+}
