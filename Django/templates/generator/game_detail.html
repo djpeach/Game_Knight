@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load custom_filters %}
+{% block content %}
+	<div class="container-fluid" style="max-width: 1500px; margin: 0 auto;">
+		<div class="row">
+			{% if game %}
+				<div class="col-12 mt-3">
+					<h2>Game: {{ game }}
+						<a href="{% url 'generator:mod-game-delete' game.id %}" class="btn btn-outline-danger btn-sm ml-5">Delete Game</a>
+						<a href="{% url 'generator:mod-game-update' game.id %}" class="btn btn-outline-info btn-sm ml-2">Edit Game</a>
+					</h2>
+					<hr>
+				</div>
+
+				<div class="col-12 mt-3">
+					<h5>Decks & Cards:</h5>
+					<div class="row px-3">
+						<!-- List group -->
+						<div class="list-group col-12 col-sm-5 col-md-4 col-lg-3" id="myList" role="tablist">
+							{% for deck, cards in game.cards_per_deck_query %}
+								<a class="list-group-item list-group-item-action {{ forloop.counter|is_first:'active' }} d-flex justify-content-between align-items-center" data-toggle="list" href="#deck-{{ forloop.counter }}"
+									 role="tab">{{ deck }}<span class="badge badge-light badge-pill">{{ cards.count }}</span></a>
+							{% endfor %}
+						</div>
+
+						<!-- Tab panes -->
+						<div class="tab-content col-12 col-sm-7 col-md-8 col-lg-9 mt-3 mt-sm-0">
+							{% for deck, cards in game.cards_per_deck_query %}
+								<div class="tab-pane {{ forloop.counter|is_first:'active' }}" id="deck-{{ forloop.counter }}" role="tabpanel">
+									<div class="row">
+										{% for card in cards %}
+											<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+												<a href="{{ card.get_absolute_url }}" class="btn btn-outline-info w-100 h-100">
+													<div class="card-body text-center font-weight-bold align-middle">
+														{{ card }}
+													</div>
+												</a>
+											</div>
+										{% endfor %}
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
